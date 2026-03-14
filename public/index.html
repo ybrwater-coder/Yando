@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Y & O">
+<title>Yohance & Oasiah</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#faf6f0;--warm:#f3ece1;--burg:#6b1a2a;--burg-light:#8b2a3e;--burg-pale:#f0dde2;--burg-mid:#c9909e;--gold:#c4a265;--text:#1e0a10;--muted:#9a6272;--bubble-me:#ede0d4;--bubble-them:#fff9f5;
+}
+html,body{height:100%;overflow:hidden;background:var(--cream)}
+body{font-family:'Jost',sans-serif;font-weight:300;color:var(--text);display:flex;flex-direction:column}
+#lock-screen{position:fixed;inset:0;background:var(--cream);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:100;padding:40px 32px}
+#lock-screen h1{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:400;color:var(--burg);letter-spacing:.04em;margin-bottom:6px}
+#lock-screen p{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:40px}
+#lock-screen input{width:100%;border:none;border-bottom:1px solid var(--burg-pale);background:transparent;padding:12px 4px;font-family:'Jost',sans-serif;font-size:18px;font-weight:300;color:var(--text);text-align:center;letter-spacing:.2em;outline:none;margin-bottom:8px}
+#lock-screen input::placeholder{letter-spacing:.1em;color:var(--muted);font-size:13px}
+#lock-err{font-size:12px;color:#a33;height:16px;margin-bottom:24px;letter-spacing:.04em}
+#lock-btn{width:100%;padding:13px;background:var(--burg);color:var(--cream);border:none;border-radius:30px;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;}
+#lock-heart{font-size:28px;margin-bottom:28px;opacity:.6}
+#app{display:flex;flex-direction:column;height:100%;max-width:480px;margin:0 auto;width:100%}
+#header{padding:16px 20px 12px;border-bottom:1px solid var(--burg-pale);background:var(--cream);display:flex;align-items:center;gap:12px;flex-shrink:0}
+.avatars{display:flex;position:relative;width:52px;height:36px}
+.av{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;letter-spacing:.05em;font-weight:400;border:1.5px solid var(--cream)}
+.av1{background:var(--burg);color:var(--cream);position:absolute;left:0;top:2px;z-index:1}
+.av2{background:var(--burg-pale);color:var(--burg);border-color:var(--burg-pale);position:absolute;left:18px;top:2px}
+.header-title{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:400;letter-spacing:.03em;color:var(--burg)}
+.header-sub{font-size:10px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-top:1px}
+#sotd{background:var(--burg);margin:10px 14px 0;border-radius:14px;overflow:hidden;cursor:pointer;flex-shrink:0}
+#sotd-inner{display:flex;align-items:center;gap:12px;padding:10px 14px}
+#sotd-text{flex:1;min-width:0}
+.sotd-label-style{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--burg-mid);margin-bottom:3px}
+.sotd-title-style{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--cream);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sotd-artist-style{font-size:11px;color:var(--burg-mid);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#sotd-badge{font-size:10px;color:var(--gold);flex-shrink:0}
+#messages{flex:1;overflow-y:auto;padding:14px 14px 8px;display:flex;flex-direction:column;gap:10px;-webkit-overflow-scrolling:touch}
+#messages::-webkit-scrollbar{width:3px}
+#messages::-webkit-scrollbar-thumb{background:var(--burg-pale);border-radius:4px}
+.msg-row{display:flex;flex-direction:column;max-width:85%}
+.msg-row.me{align-self:flex-end;align-items:flex-end}
+.msg-row.them{align-self:flex-start;align-items:flex-start}
+.msg-sender{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.bubble{padding:9px 14px;border-radius:18px;font-size:14px;line-height:1.55;word-break:break-word}
+.me .bubble{background:var(--bubble-me);border-bottom-right-radius:4px}
+.them .bubble{background:var(--bubble-them);border:1px solid var(--burg-pale);border-bottom-left-radius:4px}
+.msg-time{font-size:10px;color:var(--muted);margin-top:2px;letter-spacing:.04em}
+.music-card{background:var(--cream);border:1px solid var(--burg-pale);border-radius:14px;overflow:hidden;margin-top:4px;max-width:270px}
+.music-art{width:100%;aspect-ratio:1;object-fit:cover;display:block}
+.music-info{padding:9px 12px 6px}
+.music-title{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--burg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.music-artist{font-size:11px;color:var(--muted);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.music-links{display:flex;gap:6px;padding:0 12px 8px;flex-wrap:wrap;align-items:center}
+.music-btn{display:inline-flex;align-items:center;gap:4px;padding:5px 10px;border-radius:20px;font-size:11px;letter-spacing:.04em;text-decoration:none;font-family:'Jost',sans-serif;font-weight:400;}
+.btn-apple{background:var(--burg);color:var(--cream)}
+.btn-spotify{background:#1DB954;color:#fff}
+.btn-sotd{background:transparent;border:1px solid var(--burg-pale);color:var(--burg);cursor:pointer;font-family:'Jost',sans-serif;font-size:11px;padding:5px 10px;border-radius:20px;}
+.music-note{font-size:11px;color:var(--muted);padding:0 12px 4px;font-style:italic}
+.rating-row{display:flex;align-items:center;gap:6px;padding:6px 12px 10px}
+.rating-label{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.stars{display:flex;gap:3px}
+.star{font-size:18px;cursor:pointer;color:var(--burg-pale);line-height:1;user-select:none;-webkit-user-select:none}
+.star.lit{color:var(--gold)}
+.rating-val{font-size:11px;color:var(--gold);font-weight:400;min-width:20px}
+.music-searching{padding:8px 12px;font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px}
+.dots span{animation:dot 1.2s infinite;display:inline-block;opacity:0}
+.dots span:nth-child(2){animation-delay:.2s}
+.dots span:nth-child(3){animation-delay:.4s}
+@keyframes dot{0%,80%,100%{opacity:0}40%{opacity:1}}
+#input-area{padding:10px 14px 20px;border-top:1px solid var(--burg-pale);background:var(--cream);flex-shrink:0}
+.who-toggle{display:flex;gap:6px;margin-bottom:8px}
+.who-btn{flex:1;padding:6px;border-radius:20px;border:1px solid var(--burg-pale);background:transparent;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all .15s}
+.who-btn.active{background:var(--burg);color:var(--cream);border-color:var(--burg)}
+.input-row{display:flex;gap:8px;align-items:flex-end}
+#msg-input{flex:1;border:1px solid var(--burg-pale);border-radius:22px;padding:9px 16px;font-family:'Jost',sans-serif;font-size:16px;font-weight:300;color:var(--text);background:var(--warm);resize:none;outline:none;line-height:1.4;max-height:80px;overflow-y:auto;-webkit-appearance:none}
+#msg-input:focus{border-color:var(--burg-mid)}
+#msg-input::placeholder{color:var(--muted)}
+#send-btn{width:40px;height:40px;border-radius:50%;background:var(--burg);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;-webkit-tap-highlight-color:transparent}
+#send-btn svg{width:15px;height:15px;fill:var(--cream)}
+.date-divider{display:flex;align-items:center;gap:10px;margin:4px 0}
+.date-divider span{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.date-divider::before,.date-divider::after{content:'';flex:1;height:1px;background:var(--burg-pale)}
+</style>
+</head>
+<body>
+<div id="lock-screen">
+  <div id="lock-heart">♥</div>
+  <h1>Yohance & Oasiah</h1>
+  <p>our music, just us</p>
+  <input type="password" id="pw-input" placeholder="enter password" onkeydown="if(event.key==='Enter')tryUnlock()">
+  <div id="lock-err"></div>
+  <button id="lock-btn" onclick="tryUnlock()">enter</button>
+</div>
+<div id="app" style="display:none">
+  <div id="header">
+    <div class="avatars">
+      <div class="av av1">Y</div>
+      <div class="av av2">O</div>
+    </div>
+    <div class="header-text">
+      <div class="header-title">Yohance & Oasiah</div>
+      <div class="header-sub">our music</div>
+    </div>
+  </div>
+  <div id="sotd" onclick="openSotd()">
+    <div id="sotd-inner">
+      <div style="width:44px;height:44px;border-radius:8px;background:var(--burg-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;color:var(--burg-mid);">♪</div>
+      <div id="sotd-text">
+        <div class="sotd-label-style">song of the day</div>
+        <div class="sotd-title-style">paste a link below to set it</div>
+        <div class="sotd-artist-style">your song, your choice</div>
+      </div>
+      <div id="sotd-badge">✦</div>
+    </div>
+  </div>
+  <div id="messages" style="margin-top:10px">
+    <div class="date-divider"><span>today</span></div>
+    <div class="msg-row them">
+      <div class="msg-sender">Oasiah</div>
+      <div class="bubble">paste a song link and i'll find it on apple music 🎵</div>
+      <div class="msg-time">just now</div>
+    </div>
+  </div>
+  <div id="input-area">
+    <div class="who-toggle">
+      <button class="who-btn active" id="btn-me" onclick="setWho('me')">Yohance</button>
+      <button class="who-btn" id="btn-them" onclick="setWho('them')">Oasiah</button>
+    </div>
+    <div class="input-row">
+      <textarea id="msg-input" rows="1" placeholder="paste a spotify or apple music link…" oninput="autoResize(this)" onkeydown="handleKey(event)"></textarea>
+      <button id="send-btn" onclick="sendMessage()">
+        <svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+<script>
+const PASSWORD = 'yando';
+function tryUnlock(){
+  const val=document.getElementById('pw-input').value;
+  if(val===PASSWORD){
+    document.getElementById('lock-screen').style.display='none';
+    const app=document.getElementById('app');
+    app.style.display='flex';app.style.flexDirection='column';app.style.height='100%';
+  } else {
+    const err=document.getElementById('lock-err');
+    err.textContent='wrong password, try again';
+    document.getElementById('pw-input').value='';
+    setTimeout(()=>err.textContent='',2000);
+  }
+}
+let currentWho='me',sotdTrack=null,cardCounter=0;
+function setWho(who){currentWho=who;document.getElementById('btn-me').classList.toggle('active',who==='me');document.getElementById('btn-them').classList.toggle('active',who==='them');}
+function autoResize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,80)+'px';}
+function handleKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage();}}
+function now(){return new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});}
+function scrollBottom(){const m=document.getElementById('messages');setTimeout(()=>m.scrollTop=m.scrollHeight,50);}
+function isSpotifyLink(t){return /spotify\.com\/(track|album|playlist)/i.test(t);}
+function isAppleMusicLink(t){return /music\.apple\.com/i.test(t);}
+async function getSpotifyTitle(url){try{const r=await fetch(`/api/spotify?url=${encodeURIComponent(url)}`);if(r.ok){const d=await r.json();return d.title||null;}}catch(e){}return null;}
+async function iTunesSearch(q){if(!q||!q.trim())return null;try{const r=await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(q.trim())}&media=music&entity=song&limit=1`);const d=await r.json();return(d.results&&d.results.length>0)?d.results[0]:null;}catch(e){return null;}}
+async function iTunesLookup(id){try{const r=await fetch(`https://itunes.apple.com/lookup?id=${id}`);const d=await r.json();return(d.results&&d.results.length>0)?d.results[0]:null;}catch(e){return null;}}
+function setRating(cardId,val){document.querySelectorAll(`#card-${cardId} .star`).forEach((s,i)=>s.classList.toggle('lit',i<val));const rv=document.querySelector(`#card-${cardId} .rating-val`);if(rv)rv.textContent=val+'/5';}
+function setSotd(track){sotdTrack=track;const art=track.artworkUrl100.replace('100x100','400x400');document.getElementById('sotd-inner').innerHTML=`<img src="${art}" style="width:44px;height:44px;border-radius:8px;object-fit:cover;flex-shrink:0;" onerror="this.style.display='none'"><div id="sotd-text"><div class="sotd-label-style">song of the day</div><div class="sotd-title-style">${escHtml(track.trackName)}</div><div class="sotd-artist-style">${escHtml(track.artistName)}</div></div><div id="sotd-badge" style="font-size:10px;color:var(--gold);flex-shrink:0;">✦</div>`;}
+function openSotd(){if(sotdTrack)window.open(sotdTrack.trackViewUrl,'_blank');}
+async function sendMessage(){const input=document.getElementById('msg-input');const text=input.value.trim();if(!text)return;input.value='';input.style.height='auto';const who=currentWho,name=who==='me'?'Yohance':'Oasiah';addBubble(who,name,text,now());scrollBottom();if(isSpotifyLink(text)||isAppleMusicLink(text)){const sid=addSearching(who==='me'?'them':'me');scrollBottom();await handleMusicLink(text,who,sid);}}
+function addBubble(who,name,text,time){const msgs=document.getElementById('messages');const row=document.createElement('div');row.className=`msg-row ${who}`;row.innerHTML=`<div class="msg-sender">${name}</div><div class="bubble">${escHtml(text)}</div><div class="msg-time">${time}</div>`;msgs.appendChild(row);}
+function addSearching(who){const msgs=document.getElementById('messages');const id='s'+Date.now();const row=document.createElement('div');row.className=`msg-row ${who}`;row.id=id;const name=who==='me'?'Yohance':'Oasiah';row.innerHTML=`<div class="msg-sender">${name}</div><div class="bubble music-searching">finding on apple music <span class="dots"><span>.</span><span>.</span><span>.</span></span></div>`;msgs.appendChild(row);return id;}
+function removeSearching(id){const el=document.getElementById(id);if(el)el.remove();}
+async function handleMusicLink(url,senderWho,searchingId){const respWho=senderWho==='me'?'them':'me';const respName=respWho==='me'?'Yohance':'Oasiah';let track=null;try{if(isAppleMusicLink(url)){try{const u=new URL(url);const iParam=u.searchParams.get('i');const lastSeg=u.pathname.split('/').filter(Boolean).pop();const lid=iParam||(/^\d+$/.test(lastSeg)?lastSeg:null);if(lid)track=await iTunesLookup(lid);}catch(e){}if(!track){try{const u=new URL(url);const segs=u.pathname.split('/').filter(Boolean);for(let i=segs.length-1;i>=0;i--){const s=segs[i];if(/^\d+$/.test(s)||['album','song','artist','playlist','us','gb','ca','au'].includes(s))continue;track=await iTunesSearch(s.replace(/-/g,' '));if(track)break;}}catch(e){}}}if(isSpotifyLink(url)&&!track){const title=await getSpotifyTitle(url);if(title)track=await iTunesSearch(title);}}catch(e){}removeSearching(searchingId);if(track)renderMusicCard(respWho,respName,track,url);else addNotFound(respWho,respName);scrollBottom();}
+function renderMusicCard(who,name,track,originalUrl){const msgs=document.getElementById('messages');const row=document.createElement('div');row.className=`msg-row ${who}`;const artUrl=track.artworkUrl100.replace('100x100','400x400');const isSpotify=isSpotifyLink(originalUrl);cardCounter++;const cid=cardCounter;let starsHtml='';for(let i=1;i<=5;i++)starsHtml+=`<span class="star" onclick="setRating(${cid},${i})">★</span>`;row.innerHTML=`<div class="msg-sender">${name}</div><div class="music-card" id="card-${cid}"><img class="music-art" src="${artUrl}" alt="${escHtml(track.trackName)}" onerror="this.style.display='none'"><div class="music-info"><div class="music-title">${escHtml(track.trackName)}</div><div class="music-artist">${escHtml(track.artistName)} · ${escHtml(track.collectionName)}</div></div><div class="rating-row"><span class="rating-label">rate it</span><div class="stars">${starsHtml}</div><span class="rating-val"></span></div><div class="music-links"><a class="music-btn btn-apple" href="${track.trackViewUrl}" target="_blank">♫ Apple Music</a>${isSpotify?`<a class="music-btn btn-spotify" href="${originalUrl}" target="_blank">Spotify</a>`:''}<button class="btn-sotd" onclick='setSotdFromCard(${JSON.stringify(track).replace(/'/g,"&#39;")})'>set as sotd</button></div><div class="music-note">found on apple music for you ✦</div></div><div class="msg-time">${now()}</div>`;msgs.appendChild(row);}
+function setSotdFromCard(track){setSotd(track);const msgs=document.getElementById('messages');const row=document.createElement('div');row.className='date-divider';row.innerHTML=`<span>song of the day updated ✦</span>`;msgs.appendChild(row);scrollBottom();}
+function addNotFound(who,name){const msgs=document.getElementById('messages');const row=document.createElement('div');row.className=`msg-row ${who}`;row.innerHTML=`<div class="msg-sender">${name}</div><div class="bubble" style="font-style:italic;color:var(--muted)">couldn't find that one on apple music 🌿 try a different link</div><div class="msg-time">${now()}</div>`;msgs.appendChild(row);}
+function escHtml(str){return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+</script>
+</body>
+</html>
